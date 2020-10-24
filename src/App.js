@@ -1,54 +1,44 @@
 
-import React, { Component } from 'react';
-import Overview from "./components/Overview";
+import React, { useState } from 'react'
+import Overview from './components/Overview';
 
-class App extends Component {
+function App() {
 
-  constructor() {
-    super();
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState([]);
 
-    this.state = {
-      task: "",
-      tasks: [],
-    };
-  }
 
-  handleChange = (e) => {
-    this.setState({
-      task: e.target.value,
-    });
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      tasks: this.state.tasks.concat(this.state.task),
-      task: "",
-    });
+  const handleChange = (e) => {
+    setTask(e.target.value);
   };
 
-  render() {
-    const { task, tasks } = this.state;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (task.trim().length > 2) {
+      setTasks([...tasks, task]);
+      setTask("");
+    } else {
+      alert("La cago, escriba algo ñero");
+    }
+  };
 
-    return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="taskInput"> Insertar tarea </label>
-            <input
-              type="text"
-              id="taskInput"
-              className="form-control"
-              value={task}
-              onChange={this.handleChange}
-            />
-            <button type="submit" className="btn btn-primary">Añadir Tarea</button>
-          </div>
-        </form>
-        <Overview tasks={tasks} />
-      </>
-    );
-  }
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="taskInput"> Escriba algo </label>
+        <input
+          type="text"
+          value={task}
+          onChange={handleChange}
+          id="algo"
+        />
+        <button type="submit"> Añadir </button>
+      </form>
+      <Overview tasks={tasks} />
+    </>
+  );
 }
 
 export default App;
+
+
