@@ -1,6 +1,5 @@
 
 import React from 'react';
-import uniqid from 'uniqid';
 
 const Overview = (props) => {
 
@@ -10,7 +9,7 @@ const Overview = (props) => {
         <ul>
             {
                 tasks.map((task) => {
-                    return <li key={uniqid()}>{task}</li>
+                    return <li key={task}>{task}</li>
                 })
             }
         </ul>
