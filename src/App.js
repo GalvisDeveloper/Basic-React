@@ -14,12 +14,17 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     if (task.trim().length > 2) {
       setTasks([...tasks, task]);
       setTask("");
     } else {
       alert("La cago, escriba algo ñero");
     }
+=======
+    setTasks([...tasks, task]);
+    setTask("");
+>>>>>>> 9c00b5c460b031ec4a9d9d2308eb3f1aaff7ec1f
   };
 
   return (
