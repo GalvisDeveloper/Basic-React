@@ -1,47 +1,28 @@
-import React, { Component } from 'react';
-import MyComponent from './components/MyComponent';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      count: 0,
-    };
+import React, { useState } from 'react';
+import Overview from './components/Overview';
+/* import MyComponent from './components/MyComponent'; */
 
-    this.countUp = this.countUp.bind(this);
-    this.countDown = this.countDown.bind(this);
-    this.reset = this.reset.bind(this);
-  }
+const App = () => {
 
-  countUp() {
-    this.setState({
-      count: this.state.count + 1,
-    });
-  }
+  const [lista, setLista] = useState(['Uno', 'Dos', 'Tres', 'Four']);
 
-  countDown() {
-    this.setState({
-      count: this.state.count - 1,
-    })
-  }
+  return (
+    <div>
 
-  reset() {
-    this.setState({
-      count: 0,
-    })
-  }
+      <h1>Testeando App</h1>
+      <Overview setLista={setLista} />
 
-  render() {
-    return (
-      <div className="App">
-        <button onClick={this.countUp} > Add here! </button>
-        <button onClick={this.reset} > Reset here! </button>
-        <button onClick={this.countDown} > Substract here! </button>
-        <p>{this.state.count}</p>
-      </div>
-    );
-  }
-}
+      <ol>
+        {
+          lista.map(aList => {
+            return <li key={aList}> {aList} </li>
+          })
+        }
+      </ol>
+    </div>
+  );
+};
 
 export default App;
