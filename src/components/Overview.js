@@ -1,40 +1,21 @@
 
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import uniqid from 'uniqid';
 
+const Overview = (props) => {
 
-const Overview = ({ setLista }) => {
-
-
-    const [campo, setCampo] = useState('');
-
-    const handleChange = (e) => {
-        setCampo(e.target.value);
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (campo.trim().length === 0) {
-            alert("Fail");
-        } else {
-            setLista(arr => [...arr, campo]);
-            setCampo("");
-        }
-    }
+    const { tasks } = props;
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={campo}
-                onChange={handleChange}
-            />
-        </form>
+        <ul>
+            {
+                tasks.map((task) => {
+                    return <li key={uniqid()}>{task}</li>
+                })
+            }
+        </ul>
     );
 };
 
-Overview.prototype = {
-    setLista: PropTypes.func.isRequired
-}
 
 export default Overview;

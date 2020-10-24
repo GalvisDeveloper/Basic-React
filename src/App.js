@@ -1,28 +1,54 @@
 
+import React, { Component } from 'react';
+import Overview from "./components/Overview";
 
-import React, { useState } from 'react';
-import Overview from './components/Overview';
-/* import MyComponent from './components/MyComponent'; */
+class App extends Component {
 
-const App = () => {
+  constructor() {
+    super();
 
-  const [lista, setLista] = useState(['Uno', 'Dos', 'Tres', 'Four']);
+    this.state = {
+      task: "",
+      tasks: [],
+    };
+  }
 
-  return (
-    <div>
+  handleChange = (e) => {
+    this.setState({
+      task: e.target.value,
+    });
+  }
 
-      <h1>Testeando App</h1>
-      <Overview setLista={setLista} />
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      tasks: this.state.tasks.concat(this.state.task),
+      task: "",
+    });
+  };
 
-      <ol>
-        {
-          lista.map(aList => {
-            return <li key={aList}> {aList} </li>
-          })
-        }
-      </ol>
-    </div>
-  );
-};
+  render() {
+    const { task, tasks } = this.state;
+
+    return (
+      <>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="taskInput"> Insertar tarea </label>
+            <input
+              type="text"
+              id="taskInput"
+              className="form-control"
+              value={task}
+              onChange={this.handleChange}
+            />
+            <button type="submit" className="btn btn-primary">Añadir Tarea</button>
+          </div>
+        </form>
+        <Overview tasks={tasks} />
+      </>
+    );
+  }
+}
 
 export default App;
