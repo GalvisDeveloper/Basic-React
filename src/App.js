@@ -5,18 +5,40 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.onClickBtn = this.onClickBtn.bind(this);
+    this.state = {
+      count: 0,
+    };
+
+    this.countUp = this.countUp.bind(this);
+    this.countDown = this.countDown.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
+  countUp() {
+    this.setState({
+      count: this.state.count + 1,
+    });
+  }
 
-  onClickBtn() {
-    console.log("Button has clicked succesfully!");
+  countDown() {
+    this.setState({
+      count: this.state.count - 1,
+    })
+  }
+
+  reset() {
+    this.setState({
+      count: 0,
+    })
   }
 
   render() {
     return (
       <div className="App">
-        <MyComponent title="React-App" onButtonClicked={this.onClickBtn} />
+        <button onClick={this.countUp} > Add here! </button>
+        <button onClick={this.reset} > Reset here! </button>
+        <button onClick={this.countDown} > Substract here! </button>
+        <p>{this.state.count}</p>
       </div>
     );
   }

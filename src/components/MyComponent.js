@@ -25,9 +25,5 @@ class MyComponent extends Component {
 export default MyComponent;
 
 {/* 
-this.state = {
-    count: 0,
-  };
 
-  this.countUp = this.countUp.bind(this);
 */ }
